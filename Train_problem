@@ -1,0 +1,59 @@
+import java.util.*;
+class Graph{
+    ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+    Graph(int v){
+        for(int i=0;i<v;i++){
+            list.add(new ArrayList<Integer>());
+        }
+    }
+
+    public void addedges(char u,char v){
+        int u_new=u-'A';
+        int v_new=v-'A';
+        list.get(u_new).add(v_new);
+        list.get(v_new).add(u_new);
+
+    }
+    
+    public void bfs(char start){
+        Queue<Integer> q=new LinkedList<>();
+        boolean v[]=new boolean[list.size()];
+        int new_start=start-'A';
+        q.add(new_start);
+        v[new_start]=true;
+        while(!q.isEmpty()){
+            int ver=q.remove();
+            System.out.print((char)(ver+'A')+" ");
+            for(int i=0;i<list.get(ver).size();i++){
+                int av=list.get(ver).get(i);
+                if(!v[av]){
+                    q.add(av);
+                    v[av]=true;
+                }
+            }
+
+        }
+    }
+}
+
+public class main {
+    public static void main(String[] args){
+        Graph g=new Graph(6);
+        // g.addedges('A','B');
+        // g.addedges('A','C');
+        // g.addedges('B','D');
+
+        g.addedges('P','Q');
+        g.addedges('P','R');
+        g.addedges('Q','S');
+        g.addedges('R','T');
+        g.addedges('T','U');
+
+
+    //    g.bfs('A');
+        g.bfs('P');
+
+
+    }
+    
+}
